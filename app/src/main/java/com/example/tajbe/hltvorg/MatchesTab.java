@@ -2,12 +2,14 @@ package com.example.tajbe.hltvorg;
 
 import android.os.AsyncTask;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -46,11 +48,13 @@ public class MatchesTab extends Fragment {
                 Elements matchElements = document.select("a[class$=a-reset block upcoming-match standard-box]");
                for (Element match:matchElements) {
                    String[] teams = match.select("td[class$=team-cell]").text().split(" ");
-                   mMatchesList.add(new MatchesClass (
-                           match.select(".time").get(1).text(),
-                           teams[0],
-                           teams[0],
-                           match.select("td[class$=event]").text()));
+                   String event =  match.select("td[class$=event]").text();
+                   if ((!event.isEmpty()) && (teams != null)){
+                       mMatchesList.add(new MatchesClass(match.select(".time").get(1).text(),
+                               teams[0],
+                               teams[1],
+                               event));
+                   }
                }
             } catch (IOException e) {
                 throw new RuntimeException("Ошибка подключения");

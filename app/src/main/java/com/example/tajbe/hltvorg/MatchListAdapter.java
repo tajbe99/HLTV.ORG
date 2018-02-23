@@ -18,21 +18,21 @@ import java.util.List;
 public class MatchListAdapter extends BaseAdapter {
 
     private Context mContext;
-    private ArrayList<MatchesClass> mMatchesList;
+    private ArrayList<MatchesClass> mMatchesLists;
 
     public MatchListAdapter(Context mContext, ArrayList<MatchesClass> mMatchesList) {
         this.mContext = mContext;
-        this.mMatchesList = new ArrayList<>(mMatchesList);
+        this.mMatchesLists = new ArrayList<>(mMatchesList);
     }
 
     @Override
     public int getCount() {
-        return mMatchesList.size();
+        return mMatchesLists.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mMatchesList.get(position);
+        return mMatchesLists.get(position);
     }
 
     @Override
@@ -45,11 +45,13 @@ public class MatchListAdapter extends BaseAdapter {
         View view = View.inflate(mContext,R.layout.customlistviewofmatches,null);
         TextView matchTime = (TextView)view.findViewById(R.id.MatchTime);
         TextView team1Name = (TextView)view.findViewById(R.id.Team1Name);
-        TextView team2Name= (TextView)view.findViewById(R.id.Team2Name);
+        TextView team2Name = (TextView)view.findViewById(R.id.Team2Name);
+        TextView event = (TextView)view.findViewById(R.id.EventName);
         TextView vs = (TextView)view.findViewById(R.id.VsText);
-        matchTime.setText(mMatchesList.get(position).getTime());
-        team1Name.setText(mMatchesList.get(position).getTeam1Cell());
-        team2Name.setText(mMatchesList.get(position).getTeam2Cell());
+        matchTime.setText(mMatchesLists.get(position).getTime());
+        team1Name.setText(mMatchesLists.get(position).getTeam1Cell());
+        team2Name.setText(mMatchesLists.get(position).getTeam2Cell());
+        event.setText(mMatchesLists.get(position).getEvent());
         vs.setText("VS");
         return view;
     }
