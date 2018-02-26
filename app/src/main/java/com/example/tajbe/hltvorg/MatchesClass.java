@@ -7,10 +7,10 @@ import java.util.ArrayList;
  */
 
 public class MatchesClass {
-    public static String time;
-    public static String team1Cell;
-    public static String team2Cell;
-    public static String event;
+    public String time;
+    public String team1Cell;
+    public String team2Cell;
+    public String event;
 
     MatchesClass(String time,String team1, String team2,String event){
         this.time = time;
@@ -21,35 +21,4 @@ public class MatchesClass {
     MatchesClass (){}
 
 
-    public static String getTime() {
-        return time;
-    }
-
-    public static String getTeam1Cell() {
-        return team1Cell;
-    }
-
-    public static String getTeam2Cell() {
-        return team2Cell;
-    }
-
-    public static String getEvent() {
-        return event;
-    }
-
-    public static void setTime(String time) {
-        MatchesClass.time = time;
-    }
-
-    public static void setTeam1Cell(String team1Cell) {
-        MatchesClass.team1Cell = team1Cell;
-    }
-
-    public static void setTeam2Cell(String team2Cell) {
-        MatchesClass.team2Cell = team2Cell;
-    }
-
-    public static void setEvent(String event) {
-        MatchesClass.event = event;
-    }
 }

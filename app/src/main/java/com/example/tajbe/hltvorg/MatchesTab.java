@@ -28,8 +28,8 @@ import java.util.List;
 
 public class MatchesTab extends Fragment {
 
-    private ListView matchList;
-    private MatchListAdapter adapter;
+    public ListView matchList;
+    public MatchListAdapter adapter;
     public static ArrayList<MatchesClass> mMatchesList = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -37,6 +37,7 @@ public class MatchesTab extends Fragment {
         matchList = (ListView)rootView.findViewById(R.id.itemsOfMatches);
         new NewThread().execute();
         adapter = new MatchListAdapter(getContext(),mMatchesList);
+        matchList.setAdapter(adapter);
         return rootView;
     }
 
@@ -45,17 +46,17 @@ public class MatchesTab extends Fragment {
         protected String doInBackground(String... arg) {
             try {
                 Document document = Jsoup.connect("https://www.hltv.org/matches").get();
-                Elements matchElements = document.select("a[class$=a-reset block upcoming-match standard-box]");
+                Elements matchElements =
+                        document.select("a[class$=a-reset block upcoming-match standard-box]");
                for (Element match:matchElements) {
                    String[] teams = match.select("td[class$=team-cell]").text().split(" ");
                    String event =  match.select("td[class$=event]").text();
+                   String time = match.select(".time").get(1).text();
                    if ((!event.isEmpty()) && (teams != null)){
-                       mMatchesList.add(new MatchesClass(match.select(".time").get(1).text(),
-                               teams[0],
-                               teams[1],
-                               event));
+                       mMatchesList.add(new MatchesClass(time, teams[0], teams[1], event));
                    }
                }
+
             } catch (IOException e) {
                 throw new RuntimeException("Ошибка подключения");
             }

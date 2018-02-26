@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,21 +19,21 @@ import java.util.List;
 public class MatchListAdapter extends BaseAdapter {
 
     private Context mContext;
-    private ArrayList<MatchesClass> mMatchesLists;
+    private ArrayList<MatchesClass> mMatchesList;
 
-    public MatchListAdapter(Context mContext, ArrayList<MatchesClass> mMatchesList) {
+    public MatchListAdapter(Context mContext, ArrayList<MatchesClass> mMatchesList1) {
         this.mContext = mContext;
-        this.mMatchesLists = new ArrayList<>(mMatchesList);
+        this.mMatchesList = new ArrayList<>(mMatchesList1);
     }
 
     @Override
     public int getCount() {
-        return mMatchesLists.size();
+        return mMatchesList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mMatchesLists.get(position);
+        return mMatchesList.get(position);
     }
 
     @Override
@@ -42,17 +43,16 @@ public class MatchListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = View.inflate(mContext,R.layout.customlistviewofmatches,null);
-        TextView matchTime = (TextView)view.findViewById(R.id.MatchTime);
-        TextView team1Name = (TextView)view.findViewById(R.id.Team1Name);
-        TextView team2Name = (TextView)view.findViewById(R.id.Team2Name);
-        TextView event = (TextView)view.findViewById(R.id.EventName);
-        TextView vs = (TextView)view.findViewById(R.id.VsText);
-        matchTime.setText(mMatchesLists.get(position).getTime());
-        team1Name.setText(mMatchesLists.get(position).getTeam1Cell());
-        team2Name.setText(mMatchesLists.get(position).getTeam2Cell());
-        event.setText(mMatchesLists.get(position).getEvent());
-        vs.setText("VS");
+        View view = convertView;
+        if (view == null) {
+            view = View.inflate(mContext, R.layout.customlistviewofmatches, null);
+        }
+        ((TextView)view.findViewById(R.id.MatchTime)).setText(mMatchesList.get(position).time);
+        ((TextView)view.findViewById(R.id.Team1Name)).setText(mMatchesList.get(position).team1Cell);
+        ((TextView)view.findViewById(R.id.Team2Name)).setText(mMatchesList.get(position).team2Cell);
+        ((TextView)view.findViewById(R.id.EventName)).setText(mMatchesList.get(position).event);
+        ((TextView)view.findViewById(R.id.VsText)).setText("VS");
+        view.setTag(position);
         return view;
     }
 }
