@@ -20,6 +20,7 @@ public class MatchListAdapter extends BaseAdapter {
 
     private Context mContext;
     private ArrayList<MatchesClass> mMatchesList;
+    private String currentDate = "";
 
     public MatchListAdapter(Context mContext, ArrayList<MatchesClass> mMatchesList1) {
         this.mContext = mContext;

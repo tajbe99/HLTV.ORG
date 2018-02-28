@@ -1,14 +1,19 @@
 package com.example.tajbe.hltvorg;
 
 import android.os.AsyncTask;
+import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.jsoup.Connection;
@@ -29,16 +34,36 @@ import java.util.List;
 public class MatchesTab extends Fragment {
 
     public ListView matchList;
+    public ProgressBar matchProgress;
     public MatchListAdapter adapter;
     public static ArrayList<MatchesClass> mMatchesList = new ArrayList<>();
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.matchestab,container,false);
-        matchList = (ListView)rootView.findViewById(R.id.itemsOfMatches);
-        new NewThread().execute();
-        adapter = new MatchListAdapter(getContext(),mMatchesList);
-        matchList.setAdapter(adapter);
-        return rootView;
+        if (Build.VERSION.SDK_INT < 21){
+            View rootView = inflater.inflate(R.layout.matchestab,container,false);
+            matchProgress = (ProgressBar)rootView.findViewById(R.id.matchProgressBar);
+            matchList = (ListView)rootView.findViewById(R.id.itemsOfMatches);
+            matchProgress.setVisibility(ProgressBar.VISIBLE);
+            new NewThread().execute();
+            adapter = new MatchListAdapter(getContext(),mMatchesList);
+            matchList.setAdapter(adapter);
+            return rootView;
+        } else {
+            matchProgress.setVisibility(ProgressBar.VISIBLE);
+            View rootView = inflater.inflate(R.layout.matchestabv2,container,false);
+            mRecyclerView = (RecyclerView) rootView.findViewById(R.id.my_recycler_view);
+            mRecyclerView.setHasFixedSize(false);
+            new NewThread().execute();
+            mLayoutManager = new LinearLayoutManager(getContext());
+            mRecyclerView.setLayoutManager(mLayoutManager);
+            mAdapter = new MyAdapter(mMatchesList);
+            mRecyclerView.setAdapter(mAdapter);
+            return rootView;
+        }
     }
 
     public class NewThread extends AsyncTask<String, Void, String>{
@@ -65,8 +90,17 @@ public class MatchesTab extends Fragment {
 
         @Override
         protected void onPostExecute(String result){
-            adapter = new MatchListAdapter(getContext(),mMatchesList);
-            matchList.setAdapter(adapter);
+            if (Build.VERSION.SDK_INT < 21) {
+                matchProgress.setVisibility(ProgressBar.INVISIBLE);
+                adapter = new MatchListAdapter(getContext(), mMatchesList);
+                matchList.setAdapter(adapter);
+            } else{
+                matchProgress.setVisibility(ProgressBar.INVISIBLE);
+                mLayoutManager = new LinearLayoutManager(getContext());
+                mRecyclerView.setLayoutManager(mLayoutManager);
+                mAdapter = new MyAdapter(mMatchesList);
+                mRecyclerView.setAdapter(mAdapter);
+            }
         }
     }
 }

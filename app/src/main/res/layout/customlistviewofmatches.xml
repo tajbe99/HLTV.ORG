@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -10,58 +11,68 @@
         android:id="@+id/MatchTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:clickable="false"
         android:text="TextView"
-        android:textSize="20sp" />
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/Team1Name"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="13dp"
-        android:layout_marginStart="13dp"
-        android:text="TextView"
-        android:textSize="13sp"
+        android:layout_width="82dp"
+        android:layout_height="29dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:maxWidth="100dp"
-        android:layout_alignBaseline="@+id/MatchTime"
-        android:layout_alignBottom="@+id/MatchTime"
-        android:layout_toRightOf="@+id/MatchTime"
-        android:layout_toEndOf="@+id/MatchTime" />
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/MatchTime"
+        app:layout_constraintStart_toEndOf="@+id/MatchTime"
+        app:layout_constraintTop_toTopOf="@+id/MatchTime" />
 
     <TextView
         android:id="@+id/Team2Name"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/Team1Name"
-        android:layout_alignBottom="@+id/Team1Name"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_width="83dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
-        android:textSize="13sp" />
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/MatchTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/MatchTime" />
 
     <TextView
-        android:maxWidth="100dp"
         android:id="@+id/VsText"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_toEndOf="@+id/Team1Name"
-        android:layout_toRightOf="@+id/Team2Name"
-        android:text="VS" />
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:maxWidth="100dp"
+        android:text="VS"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="@+id/Team1Name"
+        app:layout_constraintEnd_toStartOf="@+id/Team2Name"
+        app:layout_constraintStart_toEndOf="@+id/Team1Name"
+        app:layout_constraintTop_toTopOf="@+id/Team1Name" />
 
     <TextView
         android:id="@+id/EventName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="15dp"
-        android:text="TextView" />
-</RelativeLayout>
+        android:layout_width="199dp"
+        android:layout_height="23dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MatchTime" />
+</android.support.constraint.ConstraintLayout>

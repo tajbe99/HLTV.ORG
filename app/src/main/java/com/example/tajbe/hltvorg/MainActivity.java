@@ -1,7 +1,10 @@
 package com.example.tajbe.hltvorg;
 
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.design.widget.TabLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -20,6 +23,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -32,6 +36,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.concurrent.ExecutionException;
+
+import static com.example.tajbe.hltvorg.R.id.container;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,16 +55,38 @@ public class MainActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
+    private TabLayout tabLayout;
+    private Toolbar toolbar;
+//    private SwipeRefreshLayout mSwipeRefreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        mSwipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.refreshLayout);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = (ViewPager) findViewById(container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+//        SwipeRefreshLayout.OnRefreshListener listener = new SwipeRefreshLayout.OnRefreshListener(){
+//            @Override
+//            public void onRefresh() {
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        mSwipeRefreshLayout.setRefreshing(false);
+//                        Toast.makeText(getApplicationContext(),"REFRESH",Toast.LENGTH_LONG).show();
+//                    }
+//                }, 4000);
+//
+//            }};
+//        mSwipeRefreshLayout.setOnRefreshListener(listener);
+//        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent,
+//                R.color.colorPrimary,
+//                R.color.colorAccent,
+//                R.color.colorPrimary);
         tabLayout.setupWithViewPager(mViewPager);
     }
 
@@ -87,16 +115,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-
-
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
