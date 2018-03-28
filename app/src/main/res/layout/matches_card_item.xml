@@ -5,12 +5,19 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="80dp"
+    card_view:cardElevation="2dp"
     android:layout_gravity="top"
-    card_view:cardCornerRadius="4dp">
+    android:animateLayoutChanges="true"
+    android:soundEffectsEnabled="true"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    card_view:cardCornerRadius="5dp">
 
     <android.support.constraint.ConstraintLayout xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="80dp">
+        android:layout_height="84dp">
 
 
         <TextView
@@ -19,7 +26,6 @@
             android:layout_height="33dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="TextView"
             android:textSize="24sp"
             android:textStyle="bold"
             card_view:layout_constraintStart_toStartOf="parent"
@@ -30,8 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="TextView"
-            android:textSize="20sp"
+            android:textSize="14sp"
             card_view:layout_constraintBottom_toBottomOf="@+id/m_time_match"
             card_view:layout_constraintStart_toEndOf="@+id/m_time_match"
             card_view:layout_constraintTop_toTopOf="@+id/m_time_match" />
@@ -39,30 +44,24 @@
         <TextView
             android:id="@+id/m_event_match"
             android:layout_width="168dp"
-            android:layout_height="wrap_content"
+            android:layout_height="29dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="TextView"
-            android:textSize="18sp"
+            android:layout_marginTop="4dp"
+            android:textSize="16sp"
             card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintStart_toEndOf="@+id/event_icon"
             card_view:layout_constraintTop_toBottomOf="@+id/m_time_match" />
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="wrap_content"
+            android:layout_width="19dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:text="VS"
             android:textColor="@android:color/darker_gray"
-            android:textSize="18sp"
+            android:textSize="14sp"
             card_view:layout_constraintBottom_toBottomOf="@+id/m_team1_cell_match"
-            card_view:layout_constraintEnd_toStartOf="@+id/m_team2_cell"
-            card_view:layout_constraintHorizontal_bias="0.51"
             card_view:layout_constraintStart_toEndOf="@+id/m_team1_cell_match"
             card_view:layout_constraintTop_toTopOf="@+id/m_team1_cell_match" />
 
@@ -70,11 +69,21 @@
             android:id="@+id/m_team2_cell"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:text="TextView"
-            android:textSize="20sp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:textSize="14sp"
             card_view:layout_constraintBottom_toBottomOf="@+id/m_time_match"
             card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toEndOf="@+id/textView4"
             card_view:layout_constraintTop_toTopOf="@+id/m_time_match" />
+
+        <ImageView
+            android:id="@+id/event_icon"
+            android:layout_width="29dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="8dp"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="@+id/m_event_match"
+            card_view:srcCompat="@drawable/bmp_file_format_symbol_318_45812" />
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

@@ -1,26 +1,22 @@
-package com.example.tajbe.hltvorg;
+package com.example.tajbe.hltvorg.matches;
 
-import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+import com.example.tajbe.hltvorg.R;
+import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
  * Created by tajbe on 28.02.2018.
  */
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+public class CardViewListAdtapter extends RecyclerView.Adapter<CardViewListAdtapter.ViewHolder> {
     private ArrayList<MatchesClass> matchesArray;
 
     // Provide a reference to the views for each data item
@@ -32,6 +28,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         public TextView teamCell1;
         public TextView teamCell2;
         public TextView event;
+        public ImageView eventIcon;
 
         public ViewHolder(View v) {
             super(v);
@@ -39,21 +36,22 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             teamCell1 = (TextView) v.findViewById(R.id.m_team1_cell_match);
             teamCell2 = (TextView) v.findViewById(R.id.m_team2_cell);
             event = (TextView) v.findViewById(R.id.m_event_match);
+            eventIcon = (ImageView) v.findViewById(R.id.event_icon);
         }
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(ArrayList<MatchesClass> myDataset) {
+    public CardViewListAdtapter(ArrayList<MatchesClass> myDataset) {
         matchesArray = myDataset;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                   int viewType) {
+    public CardViewListAdtapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                              int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_recycler_view, parent, false);
+                .inflate(R.layout.matches_card_item, parent, false);
         ViewHolder vh = new ViewHolder(v);
         return vh;
     }
@@ -67,6 +65,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         holder.teamCell1.setText(matchesArray.get(position).team1Cell);
         holder.teamCell2.setText(matchesArray.get(position).team2Cell);
         holder.event.setText(matchesArray.get(position).event);
+        if (!matchesArray.get(position).team2Logo.isEmpty()) {
+            Picasso.with(holder.eventIcon.getContext())
+                    .load(matchesArray.get(position).team2Logo)
+                    .resize(29,29)
+                    .into( holder.eventIcon);
+        }
 
     }
 
